@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import Dropdown from './components/Dropdown';
 
-function App() {
+const App = () => {
   const [top, setTop] = useState();
   const [left, setLeft] = useState();
   const [display, setDisplay] = useState('none');
@@ -9,6 +10,11 @@ function App() {
   const [cursor, setCursor] = useState('pointer');
   const [target, setTarget] = useState('placeholder');
   const [hide, setHide] = useState('block');
+  const [score, setScore] = useState({
+    peter: 'darkcyan',
+    sam: 'darkcyan',
+    eric: 'darkcyan',
+  });
 
   const clickPicture = (e) => {
     setLeft(e.pageX);
@@ -30,6 +36,9 @@ function App() {
 
     if (re.test(e.target.innerText)) {
       setTarget('found: ' + target);
+      const newObj = { ...score };
+      newObj[target] = 'grey';
+      setScore(newObj);
     }
   };
 
@@ -63,32 +72,34 @@ function App() {
       onClick={pop ? clickPicture : clickMenu}
       style={{ cursor: cursor }}
     >
-      <div className="menu" style={styles.menuStyle}>
-        <ul onClick={clickMenu}>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-        </ul>
+      <Dropdown clickMenu={clickMenu} styles={styles} />
+      {/* <div
+        id="peter"
+        onClick={pop ? clickTarget : clickPicture}
+        style={{ display: hide }}
+      ></div>
+      <div
+        id="sam"
+        onClick={pop ? clickTarget : clickPicture}
+        style={{ display: hide }}
+      ></div>
+      <div
+        id="eric"
+        onClick={pop ? clickTarget : clickPicture}
+        style={{ display: hide }}
+      ></div>
+      <div id="p-score" style={{ color: score.peter }}>
+        Peter
       </div>
-      <div className="box" style={styles.boxStyle}></div>
-      <div
-        id="one"
-        onClick={pop ? clickTarget : clickPicture}
-        style={{ display: hide }}
-      ></div>
-      <div
-        id="two"
-        onClick={pop ? clickTarget : clickPicture}
-        style={{ display: hide }}
-      ></div>
-      <div
-        id="three"
-        onClick={pop ? clickTarget : clickPicture}
-        style={{ display: hide }}
-      ></div>
+      <div id="s-score" style={{ color: score.sam }}>
+        Sam
+      </div>
+      <div id="e-score" style={{ color: score.eric }}>
+        Eric
+      </div> */}
     </div>
   );
-}
+};
 
 export default App;
 
