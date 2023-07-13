@@ -1,0 +1,56 @@
+.App {
+  border: 2px solid orange;
+  color: whitesmoke;
+  position: relative;
+  width: 200px;
+  height: 500px;
+  cursor: pointer;
+}
+
+.menu {
+  font-size: 30px;
+  position: absolute;
+}
+
+ul {
+  border: 2px solid lightgreen;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li:hover {
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
+.box {
+  border: 2px solid magenta;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+}
+
+#one,
+#two,
+#three {
+  border: 2px solid bisque;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+}
+
+#one {
+  top: 100px;
+  left: 50px;
+}
+
+#two {
+  top: 200px;
+  left: 100px;
+}
+
+#three {
+  top: 300px;
+  left: 70px;
+}
