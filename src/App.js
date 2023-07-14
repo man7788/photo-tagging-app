@@ -26,7 +26,11 @@ const App = () => {
     setPop(false);
     setCursor('default');
     setTarget('quit');
-    setHide('block');
+    if (hide === 'block') {
+      setHide('none');
+    } else if (hide === 'none') {
+      setHide('block');
+    }
   };
 
   const clickMenu = (e) => {
@@ -76,7 +80,7 @@ const App = () => {
       style={{ cursor: cursor }}
     >
       <div className="title">Where're They?</div>
-      <div class="frame">
+      <div className="frame">
         <Photo photo={peter} peguin="Peter" />
         <Photo photo={sam} peguin="Sam" />
         <Photo photo={eric} peguin="Eric" />
