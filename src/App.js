@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Dropdown from './components/Dropdown';
 import Target from './components/Target';
+import Photo from './components/Photo';
+import { peter, sam, eric } from './images/album';
 
 const App = () => {
   const [top, setTop] = useState();
@@ -73,6 +75,12 @@ const App = () => {
       onClick={pop ? clickPicture : clickMenu}
       style={{ cursor: cursor }}
     >
+      <div className="title">Where're They?</div>
+      <div class="frame">
+        <Photo photo={peter} peguin="Peter" />
+        <Photo photo={sam} peguin="Sam" />
+        <Photo photo={eric} peguin="Eric" />
+      </div>
       <Dropdown clickMenu={clickMenu} styles={styles} />
       <Target
         id="peter"
