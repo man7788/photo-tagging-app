@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import Dropdown from './components/Dropdown';
+import Target from './components/Target';
 
 const App = () => {
   const [top, setTop] = useState();
@@ -73,22 +74,28 @@ const App = () => {
       style={{ cursor: cursor }}
     >
       <Dropdown clickMenu={clickMenu} styles={styles} />
-      {/* <div
+      <Target
         id="peter"
-        onClick={pop ? clickTarget : clickPicture}
-        style={{ display: hide }}
-      ></div>
-      <div
+        clickTarget={clickTarget}
+        clickPicture={clickPicture}
+        pop={pop}
+        hide={hide}
+      />
+      <Target
         id="sam"
-        onClick={pop ? clickTarget : clickPicture}
-        style={{ display: hide }}
-      ></div>
-      <div
+        clickTarget={clickTarget}
+        clickPicture={clickPicture}
+        pop={pop}
+        hide={hide}
+      />
+      <Target
         id="eric"
-        onClick={pop ? clickTarget : clickPicture}
-        style={{ display: hide }}
-      ></div>
-      <div id="p-score" style={{ color: score.peter }}>
+        clickTarget={clickTarget}
+        clickPicture={clickPicture}
+        pop={pop}
+        hide={hide}
+      />
+      {/* <div id="p-score" style={{ color: score.peter }}>
         Peter
       </div>
       <div id="s-score" style={{ color: score.sam }}>
