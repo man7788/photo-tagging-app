@@ -1,6 +1,7 @@
 .menu {
   font-size: 1.5rem;
   position: absolute;
+  z-index: 16777271;
 }
 
 ul {
