@@ -14,10 +14,12 @@ const App = () => {
   const [target, setTarget] = useState('placeholder');
   const [hide, setHide] = useState('block');
   const [score, setScore] = useState({
-    peter: 'darkcyan',
-    sam: 'darkcyan',
-    eric: 'darkcyan',
+    peter: { color: 'teal', filter: 'brightness(100%)' },
+    sam: { color: 'teal', filter: 'brightness(100%)' },
+    eric: { color: 'teal', filter: 'brightness(100%)' },
   });
+  // const [clock, setClock] = useState();
+  // const [time, setTime] = useState({ s: 0, m: 0, h: 0 });
 
   const clickPicture = (e) => {
     setLeft(e.pageX);
@@ -44,7 +46,7 @@ const App = () => {
     if (re.test(e.target.innerText)) {
       setTarget('found: ' + target);
       const newObj = { ...score };
-      newObj[target] = 'grey';
+      newObj[target] = { color: 'lightgrey', filter: 'brightness(50%)' };
       setScore(newObj);
     }
   };
@@ -73,6 +75,45 @@ const App = () => {
     },
   };
 
+  // const startTime = () => {
+  //   const obj = { ...time };
+
+  //   if (time.s < 59) {
+  //     obj.s = time.s + 1;
+  //   } else if (time.s === 59 && time.m < 59) {
+  //     obj.s = 0;
+  //     obj.m = time.m + 1;
+  //   } else if (time.s === 59 && time.m === 59) {
+  //     obj.s = 0;
+  //     obj.m = 0;
+  //     obj.h = time.h + 1;
+  //   }
+
+  //   setTime(obj);
+  // };
+
+  // useEffect(() => {
+  //   setTimeout(startTime, 1000);
+  //   let s = time.s;
+  //   let m = time.m;
+  //   let h = time.h;
+
+  //   if (time.s < 10) {
+  //     s = '0' + time.s;
+  //   }
+
+  //   if (time.m < 10) {
+  //     m = '0' + time.m;
+  //   }
+
+  //   if (time.h < 10) {
+  //     h = '0' + time.h;
+  //   }
+
+  //   const newClock = `${h}:${m}:${s}`;
+  //   setClock(newClock);
+  // }, [time]);
+
   return (
     <div
       className="App"
@@ -81,9 +122,9 @@ const App = () => {
     >
       <div className="title">Where're They?</div>
       <div className="frame">
-        <Photo photo={peter} peguin="Peter" />
-        <Photo photo={sam} peguin="Sam" />
-        <Photo photo={eric} peguin="Eric" />
+        <Photo photo={peter} peguin="Peter" style={score.peter} />
+        <Photo photo={sam} peguin="Sam" style={score.sam} />
+        <Photo photo={eric} peguin="Eric" style={score.eric} />
       </div>
       <Dropdown clickMenu={clickMenu} styles={styles} />
       <Target
@@ -107,15 +148,7 @@ const App = () => {
         pop={pop}
         hide={hide}
       />
-      {/* <div id="p-score" style={{ color: score.peter }}>
-        Peter
-      </div>
-      <div id="s-score" style={{ color: score.sam }}>
-        Sam
-      </div>
-      <div id="e-score" style={{ color: score.eric }}>
-        Eric
-      </div> */}
+      {/* <div>{clock}</div> */}
     </div>
   );
 };
