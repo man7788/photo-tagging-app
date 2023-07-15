@@ -1,9 +1,10 @@
 import '../styles/Clock.css';
 import { useState, useEffect } from 'react';
 
-const Clock = () => {
+const Clock = ({ gameover }) => {
   const [clock, setClock] = useState();
   const [time, setTime] = useState({ s: 0, m: 0, h: 0 });
+
   const startTime = () => {
     const obj = { ...time };
 
@@ -22,25 +23,30 @@ const Clock = () => {
   };
 
   useEffect(() => {
-    setTimeout(startTime, 1000);
-    let s = time.s;
-    let m = time.m;
-    let h = time.h;
+    if (gameover !== true) {
+      setTimeout(startTime, 1000);
 
-    if (time.s < 10) {
-      s = '0' + time.s;
+      let s = time.s;
+      let m = time.m;
+      let h = time.h;
+
+      if (time.s < 10) {
+        s = '0' + time.s;
+      }
+
+      if (time.m < 10) {
+        m = '0' + time.m;
+      }
+
+      if (time.h < 10) {
+        h = '0' + time.h;
+      }
+
+      const newClock = `${h}:${m}:${s}`;
+
+      setClock(newClock);
     }
-
-    if (time.m < 10) {
-      m = '0' + time.m;
-    }
-
-    if (time.h < 10) {
-      h = '0' + time.h;
-    }
-
-    const newClock = `${h}:${m}:${s}`;
-    setClock(newClock);
+    console.log(time);
   }, [time]);
 
   return <div className="Clock">{clock}</div>;

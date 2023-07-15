@@ -14,11 +14,12 @@ const App = () => {
   const [cursor, setCursor] = useState('pointer');
   const [target, setTarget] = useState('placeholder');
   const [hide, setHide] = useState('block');
-  const [score, setScore] = useState({
+  const [photo, setPhoto] = useState({
     peter: { color: 'teal', filter: 'brightness(100%)' },
-    sam: { color: 'teal', filter: 'brightness(100%)' },
-    eric: { color: 'teal', filter: 'brightness(100%)' },
+    // sam: { color: 'teal', filter: 'brightness(100%)' },
+    // eric: { color: 'teal', filter: 'brightness(100%)' },
   });
+  const [score, setScore] = useState(0);
 
   const clickPicture = (e) => {
     setLeft(e.pageX);
@@ -44,9 +45,10 @@ const App = () => {
 
     if (re.test(e.target.innerText)) {
       setTarget('found: ' + target);
-      const newObj = { ...score };
+      const newObj = { ...photo };
       newObj[target] = { color: 'lightgrey', filter: 'brightness(50%)' };
-      setScore(newObj);
+      setPhoto(newObj);
+      checkScore();
     }
   };
 
@@ -57,9 +59,16 @@ const App = () => {
     setHide('none');
   };
 
-  useEffect(() => {
-    console.log(target);
-  }, [target]);
+  const checkScore = () => {
+    setScore(score + 1);
+    if (score === Object.keys(photo).length - 1) {
+      setScore(true);
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log(score);
+  // }, [score]);
 
   const styles = {
     menuStyle: {
@@ -82,9 +91,9 @@ const App = () => {
     >
       <div className="title">Where're They?</div>
       <div className="frame">
-        <Photo photo={peter} peguin="Peter" style={score.peter} />
-        <Photo photo={sam} peguin="Sam" style={score.sam} />
-        <Photo photo={eric} peguin="Eric" style={score.eric} />
+        <Photo photo={peter} peguin="Peter" style={photo.peter} />
+        <Photo photo={sam} peguin="Sam" style={photo.sam} />
+        <Photo photo={eric} peguin="Eric" style={photo.eric} />
       </div>
       <Dropdown clickMenu={clickMenu} styles={styles} />
       <Target
@@ -108,7 +117,7 @@ const App = () => {
         pop={pop}
         hide={hide}
       />
-      <Clock />
+      <Clock gameover={score} />
     </div>
   );
 };
