@@ -5,6 +5,7 @@ import Target from './components/Target';
 import Photo from './components/Photo';
 import { peter, sam, eric } from './images/album';
 import Clock from './components/Clock';
+import Popup from './components/Popup';
 
 const App = () => {
   const [top, setTop] = useState();
@@ -16,22 +17,27 @@ const App = () => {
   const [hide, setHide] = useState('block');
   const [photo, setPhoto] = useState({
     peter: { color: 'teal', filter: 'brightness(100%)' },
-    // sam: { color: 'teal', filter: 'brightness(100%)' },
-    // eric: { color: 'teal', filter: 'brightness(100%)' },
+    sam: { color: 'teal', filter: 'brightness(100%)' },
+    eric: { color: 'teal', filter: 'brightness(100%)' },
   });
   const [score, setScore] = useState(0);
+  const [popUpDisplay, setPopupDisplay] = useState('none');
 
   const clickPicture = (e) => {
-    setLeft(e.pageX);
-    setTop(e.pageY);
-    setDisplay('block');
-    setPop(false);
-    setCursor('default');
-    setTarget('quit');
-    if (hide === 'block') {
-      setHide('none');
-    } else if (hide === 'none') {
-      setHide('block');
+    if (popUpDisplay === 'none') {
+      setLeft(e.pageX);
+      setTop(e.pageY);
+      setDisplay('block');
+      setPop(false);
+      setCursor('default');
+      setTarget('quit');
+      if (hide === 'block') {
+        setHide('none');
+      } else if (hide === 'none') {
+        setHide('block');
+      }
+    } else {
+      return;
     }
   };
 
@@ -66,9 +72,11 @@ const App = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(score);
-  // }, [score]);
+  useEffect(() => {
+    if (popUpDisplay === 'flex') {
+      setCursor('default');
+    }
+  }, [popUpDisplay]);
 
   const styles = {
     menuStyle: {
@@ -117,15 +125,14 @@ const App = () => {
         pop={pop}
         hide={hide}
       />
-      <Clock gameover={score} />
+      <Clock
+        gameover={score}
+        setPopupDisplay={setPopupDisplay}
+        setScore={setScore}
+      />
+      <Popup style={popUpDisplay} score={score} />
     </div>
   );
 };
 
 export default App;
-
-// Things to create:
-// 1. Target Box
-// 2. Dropdown Menu
-
-// Put an invisible div over the right target
