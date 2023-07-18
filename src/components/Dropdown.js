@@ -5,14 +5,14 @@ const Dropdown = ({ clickMenu, styles }) => {
 
   return (
     <div className="Dropdown">
-      <div className="menu" style={menuStyle}>
-        <ul onClick={clickMenu}>
-          <li>Peter</li>
-          <li>Sam</li>
-          <li>Eric</li>
+      <div className="menu" data-testid="menu" style={menuStyle}>
+        <ul>
+          <li onClick={clickMenu}>Peter</li>
+          <li onClick={clickMenu}>Sam</li>
+          <li onClick={clickMenu}>Eric</li>
         </ul>
       </div>
-      <div className="box" style={boxStyle}></div>
+      <div className="box" data-testid="box" style={boxStyle}></div>
     </div>
   );
 };
