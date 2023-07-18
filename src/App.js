@@ -42,6 +42,7 @@ const App = () => {
   };
 
   const clickMenu = (e) => {
+    e.stopPropagation();
     setDisplay('none');
     setPop(true);
     setCursor('pointer');
@@ -49,7 +50,7 @@ const App = () => {
 
     const re = new RegExp(`^${target}$`, 'i');
 
-    if (re.test(e.target.innerText)) {
+    if (re.test(e.target.textContent)) {
       setTarget('found: ' + target);
       const newObj = { ...photo };
       newObj[target] = { color: 'lightgrey', filter: 'brightness(50%)' };
@@ -96,6 +97,7 @@ const App = () => {
       className="App"
       onClick={pop ? clickPicture : clickMenu}
       style={{ cursor: cursor }}
+      data-testid="App"
     >
       <div className="title">Where're They?</div>
       <div className="frame">
