@@ -11,7 +11,6 @@ const Popup = ({ style, score }) => {
   const onSubmitTask = (e) => {
     e.preventDefault();
     setName('');
-    console.log(name);
   };
 
   return (
